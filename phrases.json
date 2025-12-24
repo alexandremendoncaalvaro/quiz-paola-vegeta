@@ -5,23 +5,23 @@
     "cruel": true,
     "obvious": false,
     "text": "Sempre há uma testemunha perigosa de suas maldades... mas os mortos não falam.",
-    "src": "UOL/YouTube/Pensador (compilações)"
+    "src": "UOL/YouTube"
   },
   {
     "id": "P02",
     "who": "Paola",
     "cruel": true,
     "obvious": false,
-    "text": "Tenha cuidado, porque, mesmo inválida como estou, saberia dar um jeito de envenenar você.",
-    "src": "Terra (lista de frases)"
+    "text": "Tenha cuidado... eu saberia dar um jeito de envenenar você.",
+    "src": "Adaptado de Terra"
   },
   {
     "id": "P03",
     "who": "Paola",
     "cruel": true,
     "obvious": false,
-    "text": "Oi Usurpadora, sabe quem sou eu? A verdadeira Paola Bracho, imbecil.",
-    "src": "Terra (lista de frases)"
+    "text": "Vou cortar a sua língua e arrancar os seus olhos. Acha que estou brincando?",
+    "src": "A Usurpadora (Cena da enfermeira)"
   },
   {
     "id": "P04",
@@ -29,23 +29,23 @@
     "cruel": true,
     "obvious": false,
     "text": "Pois deve agradecer muito ao diabo, que neste caso sou eu.",
-    "src": "Terra (lista de frases)"
+    "src": "Terra"
   },
   {
     "id": "P05",
     "who": "Paola",
     "cruel": false,
-    "obvious": true,
-    "text": "Eu quero dinheiro, pra me divertir. Um milhão de dólares, um milhão!",
-    "src": "Terra/UOL (compilações)"
+    "obvious": false,
+    "text": "A única coisa que me interessa é o dinheiro. Com ele posso ter o mundo aos meus pés.",
+    "src": "Adaptado (Fala recorrente)"
   },
   {
     "id": "P06",
     "who": "Paola",
-    "cruel": false,
+    "cruel": true,
     "obvious": false,
-    "text": "Não precisam me esperar. Eu já estou pronta.",
-    "src": "Terra (lista de frases)"
+    "text": "Malditos marginais! Saiam do meu caminho!",
+    "src": "A Usurpadora (Cena clássica)"
   },
   {
     "id": "P07",
@@ -53,86 +53,198 @@
     "cruel": true,
     "obvious": false,
     "text": "Eu detesto sentimentalismo barato.",
-    "src": "Terra (lista de frases)"
+    "src": "Terra"
   },
   {
     "id": "P08",
     "who": "Paola",
     "cruel": true,
     "obvious": false,
-    "text": "Ela vai ter que engolir esse amor... e vai se engasgar.",
-    "src": "Terra (lista de frases)"
+    "text": "Vai ter que engolir esse amor... e vai se engasgar com ele.",
+    "src": "Terra"
+  },
+  {
+    "id": "P09",
+    "who": "Paola",
+    "cruel": true,
+    "obvious": false,
+    "text": "Você me dá nojo. Não ouse respirar o mesmo ar que eu.",
+    "src": "A Usurpadora (Cena com a família Bracho)"
+  },
+  {
+    "id": "P10",
+    "who": "Paola",
+    "cruel": true,
+    "obvious": false,
+    "text": "Vou destruir você e tudo o que você ama. E vou rir enquanto faço isso.",
+    "src": "A Usurpadora (Ameaça recorrente)"
+  },
+  {
+    "id": "P11",
+    "who": "Paola",
+    "cruel": false,
+    "obvious": false,
+    "text": "Eu sempre consigo o que eu quero, custe o que custar.",
+    "src": "Terra (Perfil da personagem)"
+  },
+  {
+    "id": "P12",
+    "who": "Paola",
+    "cruel": true,
+    "obvious": false,
+    "text": "Para mim, você é apenas um brinquedo quebrado que eu já cansei de usar.",
+    "src": "Adaptado (Relação com amantes)"
+  },
+  {
+    "id": "P13",
+    "who": "Paola",
+    "cruel": true,
+    "obvious": false,
+    "text": "Acha mesmo que pode me enfrentar? Pobrezinho...",
+    "src": "Adaptado de cenas de confronto"
+  },
+  {
+    "id": "P14",
+    "who": "Paola",
+    "cruel": true,
+    "obvious": false,
+    "text": "Seus gritos de desespero serão música para os meus ouvidos.",
+    "src": "Adaptado (Contexto de vilania extrema)"
+  },
+  {
+    "id": "P15",
+    "who": "Paola",
+    "cruel": false,
+    "obvious": false,
+    "text": "Não tolero incompetência. Faça direito ou suma da minha frente.",
+    "src": "Frase genérica de chefe abusiva"
   },
   {
     "id": "V01",
     "who": "Vegeta",
     "cruel": true,
     "obvious": false,
-    "text": "Kakarotto imundo, roubarei o dinheiro daquele verme insolente para me alimentar! Eu tenho esse direito, sou o ser mais forte do Universo, o Príncipe dos Sayajins.",
-    "src": "Wikiquote (PT)"
+    "text": "Eu pertenço à elite! Não ouse me comparar com esse lixo de classe baixa.",
+    "src": "Adaptado (Saga Saiyajin)"
   },
   {
     "id": "V02",
     "who": "Vegeta",
     "cruel": false,
     "obvious": false,
-    "text": "Tudo o que desejava era ser o mais forte, por isso treinava duro, jamais me dei por vencido!",
-    "src": "Wikiquote (PT)"
+    "text": "Ninguém me dá ordens! Eu faço o que eu quiser, na hora que eu quiser.",
+    "src": "Adaptado (Saga Majin Boo)"
   },
   {
     "id": "V03",
     "who": "Vegeta",
-    "cruel": false,
+    "cruel": true,
     "obvious": false,
-    "text": "Mas que demente!",
-    "src": "Wikiquote (PT)"
+    "text": "Mas que demente! Como ousa me desafiar?",
+    "src": "Wikiquote"
   },
   {
     "id": "V04",
     "who": "Vegeta",
     "cruel": true,
     "obvious": false,
-    "text": "Maldito Kakaroto, mal posso ver seus movimentos!",
-    "src": "Wikiquote (PT)"
+    "text": "Você não passa de lixo. Não desperdiçarei minha energia com alguém tão insignificante.",
+    "src": "Dragon Ball Z (Frase recorrente adaptada)"
   },
   {
     "id": "V05",
     "who": "Vegeta",
-    "cruel": false,
+    "cruel": true,
     "obvious": false,
-    "text": "Mesmo tendo visto tão pouco pude perceber que vocês não são tão terríveis como nos contaram.",
-    "src": "Wikiquote (PT)"
+    "text": "Vou mandar você para o inferno em pedacinhos.",
+    "src": "Dragon Ball Z (Saga Freeza/Cell)"
   },
   {
     "id": "V06",
     "who": "Vegeta",
     "cruel": true,
     "obvious": false,
-    "text": "Estou muito interessado em saber se vocês podem sentir medo, mesmo sendo uns robôs de nada.",
-    "src": "Wikiquote (PT)"
+    "text": "Estou muito interessado em saber se vocês podem sentir medo.",
+    "src": "Wikiquote"
   },
   {
     "id": "V07",
     "who": "Vegeta",
     "cruel": false,
     "obvious": false,
-    "text": "Muito bem, podem ir pra casa tomar café com leite, e não interfiram na luta.",
-    "src": "Wikiquote (PT)"
+    "text": "Muito bem, podem ir pra casa tomar café com leite, e não interfiram.",
+    "src": "Wikiquote"
   },
   {
     "id": "V08",
     "who": "Vegeta",
-    "cruel": false,
+    "cruel": true,
     "obvious": false,
-    "text": "Adeus Bulma, Trunks e você também, Kakaroto…",
-    "src": "Versão Dublada (texto citando a fala)"
+    "text": "Sinto pena da sua ignorância. Você vai morrer sem nem entender o que aconteceu.",
+    "src": "Adaptado (Saga Majin Boo)"
   },
   {
     "id": "V09",
     "who": "Vegeta",
+    "cruel": true,
+    "obvious": false,
+    "text": "Inseto insolente! Desapareça da minha frente agora mesmo!",
+    "src": "Frase recorrente (Dublagem BR)"
+  },
+  {
+    "id": "V10",
+    "who": "Vegeta",
+    "cruel": true,
+    "obvious": false,
+    "text": "Vou esmagar você como se fosse um inseto nojento.",
+    "src": "Dragon Ball Z (Saga Saiyajin/Cell)"
+  },
+  {
+    "id": "V11",
+    "who": "Vegeta",
+    "cruel": true,
+    "obvious": false,
+    "text": "Que humilhação... ser tocado por alguém de nível tão baixo.",
+    "src": "Adaptado (Luta contra Goku/Kuririn)"
+  },
+  {
+    "id": "V12",
+    "who": "Vegeta",
     "cruel": false,
-    "obvious": true,
-    "text": "É de mais de 8000!",
-    "src": "Wikiquote (PT)"
+    "obvious": false,
+    "text": "Sua confiança é irritante. Vou acabar com esse sorrisinho agora mesmo.",
+    "src": "Dragon Ball Z (Contra Cell/Androides)"
+  },
+  {
+    "id": "V13",
+    "who": "Vegeta",
+    "cruel": true,
+    "obvious": false,
+    "text": "Ajoelhe-se e peça perdão! Talvez eu tenha piedade.",
+    "src": "Wikiquote (Personalidade clássica)"
+  },
+  {
+    "id": "V14",
+    "who": "Vegeta",
+    "cruel": false,
+    "obvious": false,
+    "text": "Pare de choramingar e lute! Tenha um pouco de dignidade!",
+    "src": "Adaptado (Treinando Gohan ou Trunks)"
+  },
+  {
+    "id": "V15",
+    "who": "Vegeta",
+    "cruel": true,
+    "obvious": false,
+    "text": "Olhe para mim quando eu estiver falando! Você não passa de um verme.",
+    "src": "Dragon Ball Z"
+  },
+  {
+    "id": "V16",
+    "who": "Vegeta",
+    "cruel": true,
+    "obvious": false,
+    "text": "Eu não preciso de ajuda de ninguém. Eu me basto sozinho.",
+    "src": "Dragon Ball Super/Z (Tema de orgulho)"
   }
 ]
