@@ -14,7 +14,7 @@
     <meta property="og:url" content="https://alexandrealvaro.com.br/quiz-paola-vegeta/">
     <meta property="og:title" content="😈 Paola Bracho ou 👿 Vegeta?">
     <meta property="og:description" content="Teste sua maldade! Quem disse essa frase: A Usurpadora ou o Príncipe Saiyajin?">
-    <meta property="og:image" content="https://alexandrealvaro.com.br/quiz-paola-vegeta/capa.jpg">
+    <meta property="og:image" content="https://alexandrealvaro.com.br/quiz-paola-vegeta/cover.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
@@ -22,7 +22,7 @@
     <meta property="twitter:url" content="https://alexandrealvaro.com.br/quiz-paola-vegeta/">
     <meta property="twitter:title" content="😈 Paola Bracho ou 👿 Vegeta?">
     <meta property="twitter:description" content="Teste sua maldade! Quem disse essa frase: A Usurpadora ou o Príncipe Saiyajin?">
-    <meta property="twitter:image" content="https://alexandrealvaro.com.br/quiz-paola-vegeta/capa.jpg">
+    <meta property="twitter:image" content="https://alexandrealvaro.com.br/quiz-paola-vegeta/cover.jpg">
 
     <style>
         :root {
@@ -441,11 +441,11 @@
 
         <div class="options-grid" id="options-grid">
             <div class="option-card" id="btn-Paola" onclick="checkAnswer('Paola', this)">
-                <img src="https://i.pinimg.com/originals/9f/21/3c/9f213c4114777265880f07425143a577.jpg" alt="Paola" class="option-img">
+                <img src="paola.jpg" alt="Paola" class="option-img">
                 <div class="option-label">Paola</div>
             </div>
             <div class="option-card" id="btn-Vegeta" onclick="checkAnswer('Vegeta', this)">
-                 <img src="https://i.pinimg.com/736x/88/2c/3f/882c3f81e649060b240167c1341c272e.jpg" alt="Vegeta" class="option-img">
+                 <img src="vegeta.jpg" alt="Vegeta" class="option-img">
                 <div class="option-label">Vegeta</div>
             </div>
         </div>
@@ -462,9 +462,9 @@
 
     <script>
         // --- CONFIGURAÇÕES ---
-        // GIFs de reação (Links externos do Tenor)
-        const paolaGif = "https://media1.tenor.com/m/XjE9q_i2cHQAAAAd/paola-bracho-risada.gif";
-        const vegetaGif = "https://media1.tenor.com/m/KeL93YkZ0mUAAAAC/vegeta-laughing.gif";
+        // Imagens Locais de Reação (Rindo)
+        const paolaReaction = "paola-risada.jpg";
+        const vegetaReaction = "vegeta-risada.jpg";
         
         // Emojis da explosão
         const paolaParticles = ['💋', '🐍', '💰', '💸', '🍷'];
@@ -588,10 +588,11 @@
             const otherCardId = selectedWho === 'Paola' ? 'btn-Vegeta' : 'btn-Paola';
             document.getElementById(otherCardId).classList.add('disabled');
 
-            // Mostra o GIF de quem falou (rindo ou sério)
+            // Mostra a imagem de quem falou (rindo)
             document.getElementById('placeholder-icon').style.display = "none";
             const imgEl = document.getElementById('char-img');
-            imgEl.src = currentQ.who === 'Paola' ? paolaGif : vegetaGif;
+            // Usa as variáveis locais definidas no topo do script
+            imgEl.src = currentQ.who === 'Paola' ? paolaReaction : vegetaReaction;
             imgEl.style.display = "block";
 
             if (isCorrect) {
