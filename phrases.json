@@ -1,0 +1,138 @@
+[
+  {
+    "id": "P01",
+    "who": "Paola",
+    "cruel": true,
+    "obvious": false,
+    "text": "Sempre há uma testemunha perigosa de suas maldades... mas os mortos não falam.",
+    "src": "UOL/YouTube/Pensador (compilações)"
+  },
+  {
+    "id": "P02",
+    "who": "Paola",
+    "cruel": true,
+    "obvious": false,
+    "text": "Tenha cuidado, porque, mesmo inválida como estou, saberia dar um jeito de envenenar você.",
+    "src": "Terra (lista de frases)"
+  },
+  {
+    "id": "P03",
+    "who": "Paola",
+    "cruel": true,
+    "obvious": false,
+    "text": "Oi Usurpadora, sabe quem sou eu? A verdadeira Paola Bracho, imbecil.",
+    "src": "Terra (lista de frases)"
+  },
+  {
+    "id": "P04",
+    "who": "Paola",
+    "cruel": true,
+    "obvious": false,
+    "text": "Pois deve agradecer muito ao diabo, que neste caso sou eu.",
+    "src": "Terra (lista de frases)"
+  },
+  {
+    "id": "P05",
+    "who": "Paola",
+    "cruel": false,
+    "obvious": true,
+    "text": "Eu quero dinheiro, pra me divertir. Um milhão de dólares, um milhão!",
+    "src": "Terra/UOL (compilações)"
+  },
+  {
+    "id": "P06",
+    "who": "Paola",
+    "cruel": false,
+    "obvious": false,
+    "text": "Não precisam me esperar. Eu já estou pronta.",
+    "src": "Terra (lista de frases)"
+  },
+  {
+    "id": "P07",
+    "who": "Paola",
+    "cruel": true,
+    "obvious": false,
+    "text": "Eu detesto sentimentalismo barato.",
+    "src": "Terra (lista de frases)"
+  },
+  {
+    "id": "P08",
+    "who": "Paola",
+    "cruel": true,
+    "obvious": false,
+    "text": "Ela vai ter que engolir esse amor... e vai se engasgar.",
+    "src": "Terra (lista de frases)"
+  },
+  {
+    "id": "V01",
+    "who": "Vegeta",
+    "cruel": true,
+    "obvious": false,
+    "text": "Kakarotto imundo, roubarei o dinheiro daquele verme insolente para me alimentar! Eu tenho esse direito, sou o ser mais forte do Universo, o Príncipe dos Sayajins.",
+    "src": "Wikiquote (PT)"
+  },
+  {
+    "id": "V02",
+    "who": "Vegeta",
+    "cruel": false,
+    "obvious": false,
+    "text": "Tudo o que desejava era ser o mais forte, por isso treinava duro, jamais me dei por vencido!",
+    "src": "Wikiquote (PT)"
+  },
+  {
+    "id": "V03",
+    "who": "Vegeta",
+    "cruel": false,
+    "obvious": false,
+    "text": "Mas que demente!",
+    "src": "Wikiquote (PT)"
+  },
+  {
+    "id": "V04",
+    "who": "Vegeta",
+    "cruel": true,
+    "obvious": false,
+    "text": "Maldito Kakaroto, mal posso ver seus movimentos!",
+    "src": "Wikiquote (PT)"
+  },
+  {
+    "id": "V05",
+    "who": "Vegeta",
+    "cruel": false,
+    "obvious": false,
+    "text": "Mesmo tendo visto tão pouco pude perceber que vocês não são tão terríveis como nos contaram.",
+    "src": "Wikiquote (PT)"
+  },
+  {
+    "id": "V06",
+    "who": "Vegeta",
+    "cruel": true,
+    "obvious": false,
+    "text": "Estou muito interessado em saber se vocês podem sentir medo, mesmo sendo uns robôs de nada.",
+    "src": "Wikiquote (PT)"
+  },
+  {
+    "id": "V07",
+    "who": "Vegeta",
+    "cruel": false,
+    "obvious": false,
+    "text": "Muito bem, podem ir pra casa tomar café com leite, e não interfiram na luta.",
+    "src": "Wikiquote (PT)"
+  },
+  {
+    "id": "V08",
+    "who": "Vegeta",
+    "cruel": false,
+    "obvious": false,
+    "text": "Adeus Bulma, Trunks e você também, Kakaroto…",
+    "src": "Versão Dublada (texto citando a fala)"
+  },
+  {
+    "id": "V09",
+    "who": "Vegeta",
+    "cruel": false,
+    "obvious": true,
+    "text": "É de mais de 8000!",
+    "src": "Wikiquote (PT)"
+  }
+]
