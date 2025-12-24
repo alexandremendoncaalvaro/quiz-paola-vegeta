@@ -116,8 +116,10 @@
     // Algumas fontes listam frases com variações de pontuação/ortografia.
 
     let DB = [];
+    let phrasesLoaded = false;
 
     // Função para carregar as frases do arquivo JSON
+    // Nota: Requer servidor web (não funciona com file://)
     async function loadPhrases() {
       try {
         const response = await fetch('phrases.json');
@@ -125,10 +127,12 @@
           throw new Error('Não foi possível carregar phrases.json');
         }
         DB = await response.json();
+        phrasesLoaded = true;
         buildPool();
       } catch (error) {
         console.error('Erro ao carregar frases:', error);
-        setStatus('Erro ao carregar frases. Recarregue a página.', 'no');
+        setStatus('Erro ao carregar frases. Abra via servidor web (ex: python3 -m http.server).', 'no');
+        el.quote.textContent = 'Erro ao carregar frases. Veja o console.';
       }
     }
 
@@ -168,6 +172,11 @@
     }
 
     function buildPool() {
+      if (!phrasesLoaded) {
+        setStatus("Aguardando carregamento das frases...", "neutral");
+        return;
+      }
+
       const avoid = el.avoidObvious.checked;
       const cruelOnly = el.onlyCruel.checked;
 
@@ -219,6 +228,10 @@
     }
 
     function nextQuestion() {
+      if (!phrasesLoaded) {
+        setStatus("Aguardando carregamento das frases...", "neutral");
+        return;
+      }
       if (pool.length === 0) buildPool();
       current = pool.shift();
       answered = false;
