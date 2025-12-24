@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Paola Bracho vs Vegeta — Quem disse?</title>
+  <style>
+    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    body { margin: 0; background:#0b0f17; color:#e8eefc; }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 24px; }
+    .card { background: #111a2b; border: 1px solid #223154; border-radius: 14px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+    h1 { margin: 0 0 10px; font-size: 20px; }
+    .muted { color: #aab6d6; }
+    .row { display:flex; gap: 10px; flex-wrap: wrap; align-items:center; }
+    button { cursor:pointer; border: 1px solid #2a3b66; background:#0f1730; color:#e8eefc; padding: 10px 12px; border-radius: 12px; font-weight: 650; }
+    button:hover { background:#142047; }
+    button.primary { background:#1b2b5b; border-color:#3757b3; }
+    button.danger { background:#3a1730; border-color:#9c3a77; }
+    button:disabled { opacity:.45; cursor:not-allowed; }
+    .quote { font-size: 20px; line-height: 1.35; margin: 14px 0 12px; }
+    .pill { display:inline-block; padding: 6px 10px; border-radius: 999px; border:1px solid #2a3b66; background:#0f1730; color:#cfe0ff; font-size: 12px; }
+    .status { margin-top: 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid #2a3b66; background:#0f1730; }
+    .ok { border-color:#2f8f5b; background:#0f1f19; }
+    .no { border-color:#b24a5a; background:#2a1216; }
+    .grid { display:grid; gap:10px; grid-template-columns: 1fr; }
+    @media (min-width: 760px) { .grid { grid-template-columns: 1.1fr .9fr; } }
+    .small { font-size: 12px; }
+    a { color:#9ec1ff; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    input[type="checkbox"]{ transform: translateY(1px); }
+    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; padding: 2px 6px; border-radius: 8px; border:1px solid #2a3b66; background:#0f1730; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="grid">
+      <div class="card">
+        <h1>Quem disse? <span class="muted">Paola Bracho</span> ou <span class="muted">Vegeta</span></h1>
+
+        <div class="row" style="justify-content:space-between; margin-bottom: 8px;">
+          <div class="row">
+            <span class="pill" id="modePill">Modo: Difícil</span>
+            <span class="pill">Placar: <b id="score">0</b>/<span id="count">0</span></span>
+            <span class="pill">Streak: <b id="streak">0</b></span>
+          </div>
+          <div class="row">
+            <button id="restartBtn" class="danger" title="Recomeçar (R)">Recomeçar</button>
+            <button id="nextBtn" class="primary" title="Próxima (N)">Próxima</button>
+          </div>
+        </div>
+
+        <div class="quote" id="quote">Clique em “Próxima” para começar.</div>
+
+        <div class="row" style="margin-top: 10px;">
+          <button id="paolaBtn" class="primary" style="flex:1;">Paola Bracho</button>
+          <button id="vegetaBtn" class="primary" style="flex:1;">Vegeta</button>
+        </div>
+
+        <div id="status" class="status muted">Dica: use <span class="kbd">N</span> (próxima) e <span class="kbd">R</span> (recomeçar).</div>
+
+        <div class="row small" style="margin-top: 10px; justify-content: space-between;">
+          <div class="muted">Fonte (aparece no modo estudo): <span id="src">—</span></div>
+          <div class="muted">ID: <span id="qid">—</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h1>Config</h1>
+
+        <div class="row" style="margin: 10px 0;">
+          <label class="row" style="gap:8px;">
+            <input id="hardMode" type="checkbox" checked />
+            <span><b>Modo difícil</b> (não revela a resposta automaticamente)</span>
+          </label>
+        </div>
+
+        <div class="row" style="margin: 10px 0;">
+          <label class="row" style="gap:8px;">
+            <input id="avoidObvious" type="checkbox" checked />
+            <span><b>Evitar frases muito óbvias</b></span>
+          </label>
+        </div>
+
+        <div class="row" style="margin: 10px 0;">
+          <label class="row" style="gap:8px;">
+            <input id="onlyCruel" type="checkbox" />
+            <span><b>Só “cruéis/sarcásticas”</b> (sem violência gráfica)</span>
+          </label>
+        </div>
+
+        <div class="row" style="margin: 10px 0;">
+          <label class="row" style="gap:8px;">
+            <input id="studyMode" type="checkbox" />
+            <span><b>Modo estudo</b> (mostra fonte e quem disse após responder)</span>
+          </label>
+        </div>
+
+        <div class="status muted small" style="margin-top: 12px;">
+          <div><b>Como jogar</b></div>
+          <div>1) Clique <b>Próxima</b></div>
+          <div>2) Escolha quem disse</div>
+          <div>3) No modo difícil, use <b>Próxima</b> para seguir (ou ative modo estudo).</div>
+        </div>
+
+        <div class="status muted small" style="margin-top: 12px;">
+          <div><b>Teclas</b></div>
+          <div><span class="kbd">1</span> Paola • <span class="kbd">2</span> Vegeta • <span class="kbd">N</span> Próxima • <span class="kbd">R</span> Recomeçar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Observação: As frases abaixo foram coletadas de listas/compilações públicas.
+    // Algumas fontes listam frases com variações de pontuação/ortografia.
+
+    const DB = [
+      // ===== PAOLA (PT-BR) =====
+      { id:"P01", who:"Paola", cruel:true,  obvious:false, text:"Sempre há uma testemunha perigosa de suas maldades... mas os mortos não falam.", src:"UOL/YouTube/Pensador (compilações)" },
+      { id:"P02", who:"Paola", cruel:true,  obvious:false, text:"Tenha cuidado, porque, mesmo inválida como estou, saberia dar um jeito de envenenar você.", src:"Terra (lista de frases)" },
+      { id:"P03", who:"Paola", cruel:true,  obvious:false, text:"Oi Usurpadora, sabe quem sou eu? A verdadeira Paola Bracho, imbecil.", src:"Terra (lista de frases)" },
+      { id:"P04", who:"Paola", cruel:true,  obvious:false, text:"Pois deve agradecer muito ao diabo, que neste caso sou eu.", src:"Terra (lista de frases)" },
+      { id:"P05", who:"Paola", cruel:false, obvious:true,  text:"Eu quero dinheiro, pra me divertir. Um milhão de dólares, um milhão!", src:"Terra/UOL (compilações)" },
+      { id:"P06", who:"Paola", cruel:false, obvious:false, text:"Não precisam me esperar. Eu já estou pronta.", src:"Terra (lista de frases)" },
+      { id:"P07", who:"Paola", cruel:true,  obvious:false, text:"Eu detesto sentimentalismo barato.", src:"Terra (lista de frases)" },
+      { id:"P08", who:"Paola", cruel:true,  obvious:false, text:"Ela vai ter que engolir esse amor... e vai se engasgar.", src:"Terra (lista de frases)" },
+
+      // ===== VEGETA (PT-BR) =====
+      { id:"V01", who:"Vegeta", cruel:true,  obvious:false, text:"Kakarotto imundo, roubarei o dinheiro daquele verme insolente para me alimentar! Eu tenho esse direito, sou o ser mais forte do Universo, o Príncipe dos Sayajins.", src:"Wikiquote (PT)" },
+      { id:"V02", who:"Vegeta", cruel:false, obvious:false, text:"Tudo o que desejava era ser o mais forte, por isso treinava duro, jamais me dei por vencido!", src:"Wikiquote (PT)" },
+      { id:"V03", who:"Vegeta", cruel:false, obvious:false, text:"Mas que demente!", src:"Wikiquote (PT)" },
+      { id:"V04", who:"Vegeta", cruel:true,  obvious:false, text:"Maldito Kakaroto, mal posso ver seus movimentos!", src:"Wikiquote (PT)" },
+      { id:"V05", who:"Vegeta", cruel:false, obvious:false, text:"Mesmo tendo visto tão pouco pude perceber que vocês não são tão terríveis como nos contaram.", src:"Wikiquote (PT)" },
+      { id:"V06", who:"Vegeta", cruel:true,  obvious:false, text:"Estou muito interessado em saber se vocês podem sentir medo, mesmo sendo uns robôs de nada.", src:"Wikiquote (PT)" },
+      { id:"V07", who:"Vegeta", cruel:false, obvious:false, text:"Muito bem, podem ir pra casa tomar café com leite, e não interfiram na luta.", src:"Wikiquote (PT)" },
+      { id:"V08", who:"Vegeta", cruel:false, obvious:false, text:"Adeus Bulma, Trunks e você também, Kakaroto…", src:"Versão Dublada (texto citando a fala)" },
+
+      // “ÓBVIA” (fica escondida se marcar Evitar óbvias)
+      { id:"V09", who:"Vegeta", cruel:false, obvious:true,  text:"É de mais de 8000!", src:"Wikiquote (PT)" },
+    ];
+
+    // ===== Estado =====
+    let pool = [];
+    let current = null;
+    let answered = false;
+    let score = 0;
+    let total = 0;
+    let streak = 0;
+
+    const el = {
+      quote: document.getElementById("quote"),
+      status: document.getElementById("status"),
+      score: document.getElementById("score"),
+      count: document.getElementById("count"),
+      streak: document.getElementById("streak"),
+      src: document.getElementById("src"),
+      qid: document.getElementById("qid"),
+      nextBtn: document.getElementById("nextBtn"),
+      restartBtn: document.getElementById("restartBtn"),
+      paolaBtn: document.getElementById("paolaBtn"),
+      vegetaBtn: document.getElementById("vegetaBtn"),
+      hardMode: document.getElementById("hardMode"),
+      avoidObvious: document.getElementById("avoidObvious"),
+      onlyCruel: document.getElementById("onlyCruel"),
+      studyMode: document.getElementById("studyMode"),
+      modePill: document.getElementById("modePill"),
+    };
+
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function buildPool() {
+      const avoid = el.avoidObvious.checked;
+      const cruelOnly = el.onlyCruel.checked;
+
+      pool = DB.filter(q => {
+        if (avoid && q.obvious) return false;
+        if (cruelOnly && !q.cruel) return false;
+        return true;
+      });
+
+      // balancear para não sair só um lado
+      const pa = pool.filter(x => x.who === "Paola");
+      const ve = pool.filter(x => x.who === "Vegeta");
+      const n = Math.min(pa.length, ve.length);
+
+      pool = shuffle(pa).slice(0, n).concat(shuffle(ve).slice(0, n));
+      pool = shuffle(pool);
+
+      current = null;
+      answered = false;
+      score = 0;
+      total = 0;
+      streak = 0;
+      renderScore();
+      setModePill();
+      setStatus("Clique em “Próxima” para começar.", "neutral");
+      el.quote.textContent = "Clique em “Próxima” para começar.";
+      el.src.textContent = "—";
+      el.qid.textContent = "—";
+    }
+
+    function setModePill() {
+      const hard = el.hardMode.checked;
+      const study = el.studyMode.checked;
+      el.modePill.textContent = study ? "Modo: Estudo" : (hard ? "Modo: Difícil" : "Modo: Casual");
+    }
+
+    function renderScore() {
+      el.score.textContent = String(score);
+      el.count.textContent = String(total);
+      el.streak.textContent = String(streak);
+    }
+
+    function setStatus(msg, kind) {
+      el.status.textContent = msg;
+      el.status.className = "status";
+      if (kind === "ok") el.status.classList.add("ok");
+      else if (kind === "no") el.status.classList.add("no");
+      else el.status.classList.add("muted");
+    }
+
+    function nextQuestion() {
+      if (pool.length === 0) buildPool();
+      current = pool.shift();
+      answered = false;
+
+      el.quote.textContent = "“" + current.text + "”";
+      el.qid.textContent = current.id;
+
+      if (el.studyMode.checked) {
+        el.src.textContent = current.src;
+      } else {
+        el.src.textContent = "—";
+      }
+
+      setStatus("Quem disse?", "neutral");
+      enableChoices(true);
+    }
+
+    function enableChoices(on) {
+      el.paolaBtn.disabled = !on;
+      el.vegetaBtn.disabled = !on;
+    }
+
+    function answer(who) {
+      if (!current || answered) return;
+      answered = true;
+      total += 1;
+
+      const correct = (who === current.who);
+      if (correct) {
+        score += 1;
+        streak += 1;
+        setStatus("✅ Acertou!", "ok");
+      } else {
+        streak = 0;
+        setStatus("❌ Errou.", "no");
+      }
+      renderScore();
+
+      const reveal = el.studyMode.checked || !el.hardMode.checked;
+      if (reveal) {
+        const said = current.who === "Paola" ? "Paola Bracho" : "Vegeta";
+        const extra = "Resposta: " + said + " • Fonte: " + current.src;
+        setStatus((correct ? "✅ Acertou! " : "❌ Errou. ") + extra, correct ? "ok" : "no");
+        el.src.textContent = current.src;
+      }
+
+      enableChoices(false);
+    }
+
+    // ===== Eventos =====
+    el.nextBtn.addEventListener("click", nextQuestion);
+    el.restartBtn.addEventListener("click", buildPool);
+
+    el.paolaBtn.addEventListener("click", () => answer("Paola"));
+    el.vegetaBtn.addEventListener("click", () => answer("Vegeta"));
+
+    [el.hardMode, el.avoidObvious, el.onlyCruel, el.studyMode].forEach(cb => {
+      cb.addEventListener("change", () => {
+        setModePill();
+        buildPool();
+      });
+    });
+
+    document.addEventListener("keydown", (e) => {
+      const k = e.key.toLowerCase();
+      if (k === "n") nextQuestion();
+      if (k === "r") buildPool();
+      if (k === "1") answer("Paola");
+      if (k === "2") answer("Vegeta");
+    });
+
+    // init
+    buildPool();
+  </script>
+</body>
+</html>
