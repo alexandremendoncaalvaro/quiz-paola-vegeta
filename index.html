@@ -3,13 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Quem disse: Paola ou Vegeta?</title>
+    <title>Quem Disse? Paola ou Vegeta</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😈</text></svg>">
+
+    <meta name="description" content="Quiz interativo: Você consegue distinguir a vilã da novela mexicana do príncipe dos Saiyajins? Jogue agora!">
+    <meta name="theme-color" content="#58cc02">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexandrealvaro.com.br/quiz-paola-vegeta/">
+    <meta property="og:title" content="😈 Paola Bracho ou 👿 Vegeta?">
+    <meta property="og:description" content="Teste sua maldade! Quem disse essa frase: A Usurpadora ou o Príncipe Saiyajin?">
+    <meta property="og:image" content="https://alexandrealvaro.com.br/quiz-paola-vegeta/capa.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://alexandrealvaro.com.br/quiz-paola-vegeta/">
+    <meta property="twitter:title" content="😈 Paola Bracho ou 👿 Vegeta?">
+    <meta property="twitter:description" content="Teste sua maldade! Quem disse essa frase: A Usurpadora ou o Príncipe Saiyajin?">
+    <meta property="twitter:image" content="https://alexandrealvaro.com.br/quiz-paola-vegeta/capa.jpg">
+
     <style>
         :root {
             --duo-green: #58cc02;
             --duo-green-dark: #46a302;
+            --duo-green-light: #89e219;
             --duo-red: #ff4b4b;
             --duo-red-dark: #d42c2c;
+            --duo-red-light: #ff8686;
             --duo-blue: #1cb0f6;
             --duo-blue-dark: #1899d6;
             --duo-gray: #e5e5e5;
@@ -22,6 +44,7 @@
             box-sizing: border-box;
             font-family: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             -webkit-tap-highlight-color: transparent;
+            user-select: none;
         }
 
         body {
@@ -35,12 +58,13 @@
             overflow: hidden;
         }
 
-        /* Header & Progress */
+        /* --- Header & Progress --- */
         header {
             padding: 16px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            z-index: 10;
         }
 
         .close-btn {
@@ -49,7 +73,10 @@
             cursor: pointer;
             border: none;
             background: none;
+            transition: transform 0.2s;
         }
+        
+        .close-btn:active { transform: scale(0.9); }
 
         .progress-container {
             flex-grow: 1;
@@ -58,17 +85,31 @@
             border-radius: 8px;
             margin-left: 15px;
             overflow: hidden;
+            position: relative;
         }
 
         .progress-bar {
             height: 100%;
             background-color: var(--duo-green);
             width: 0%;
-            transition: width 0.5s ease;
+            transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             border-radius: 8px;
+            position: relative;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            height: 4px;
+            background-color: var(--duo-green-light);
+            border-radius: 4px;
+            opacity: 0.5;
         }
 
-        /* Main Game Area */
+        /* --- Main Game Area --- */
         main {
             flex: 1;
             display: flex;
@@ -79,6 +120,7 @@
             max-width: 600px;
             margin: 0 auto;
             width: 100%;
+            position: relative;
         }
 
         .character-display {
@@ -94,20 +136,24 @@
             max-height: 100%;
             max-width: 100%;
             border-radius: 12px;
-            display: none; /* Hidden by default */
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: none;
+            box-shadow: 0 8px 0 rgba(0,0,0,0.1);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .placeholder-icon {
             font-size: 80px;
             color: var(--duo-gray);
+            animation: float 3s ease-in-out infinite;
         }
 
+        /* Balão de Texto */
         .question-bubble {
             border: 2px solid var(--duo-gray);
             border-radius: 16px;
-            padding: 20px;
-            font-size: 1.2rem;
+            padding: 24px;
+            font-size: 1.3rem;
+            line-height: 1.5;
             font-weight: 700;
             color: var(--duo-text);
             background: white;
@@ -115,36 +161,30 @@
             width: 100%;
             text-align: center;
             margin-bottom: 30px;
+            transition: transform 0.3s;
         }
 
+        .question-bubble::after, .question-bubble::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            border-style: solid;
+            width: 0;
+        }
         .question-bubble::after {
-            content: '';
-            position: absolute;
             top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
             border-width: 0 10px 10px;
-            border-style: solid;
             border-color: var(--duo-gray) transparent;
-            display: block;
-            width: 0;
         }
-
         .question-bubble::before {
-            content: '';
-            position: absolute;
             top: -7px;
-            left: 50%;
-            transform: translateX(-50%);
             border-width: 0 10px 10px;
-            border-style: solid;
             border-color: #fff transparent;
-            display: block;
-            width: 0;
             z-index: 1;
         }
 
-        /* Options Grid */
+        /* --- Options Grid --- */
         .options-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -157,44 +197,67 @@
             border: 2px solid var(--duo-gray);
             border-bottom: 4px solid var(--duo-gray);
             border-radius: 16px;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.1s;
+            transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 150px;
+            height: 160px;
+            position: relative;
+            overflow: hidden;
         }
 
         .option-card:active {
-            transform: translateY(2px);
-            border-bottom-width: 2px;
+            transform: translateY(4px);
+            border-bottom-width: 0px;
+            margin-top: 4px;
+            margin-bottom: -4px;
         }
 
-        .option-card.selected {
-            background-color: #ddf4ff;
-            border-color: var(--duo-blue);
-            border-bottom-color: var(--duo-blue-dark);
+        .option-card.correct-select {
+            background-color: #d7ffb8;
+            border-color: var(--duo-green);
+            border-bottom-color: var(--duo-green-dark);
+            color: var(--duo-green-dark);
+        }
+
+        .option-card.wrong-select {
+            background-color: #ffdfe0;
+            border-color: var(--duo-red);
+            border-bottom-color: var(--duo-red-dark);
+            color: var(--duo-red-dark);
+            animation: wobble 0.6s ease-in-out;
+        }
+
+        .option-card.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+            filter: grayscale(100%);
         }
 
         .option-img {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             object-fit: cover;
-            border: 2px solid var(--duo-gray);
+            border: 3px solid var(--duo-gray);
+            transition: border-color 0.2s;
         }
+
+        .correct-select .option-img { border-color: var(--duo-green); }
+        .wrong-select .option-img { border-color: var(--duo-red); }
 
         .option-label {
             font-weight: 800;
-            font-size: 1.1rem;
-            color: var(--duo-text);
+            font-size: 1.2rem;
+            color: inherit;
         }
 
-        /* Feedback Sheet (Bottom) */
+        /* --- Feedback Sheet --- */
         .feedback-sheet {
             position: fixed;
             bottom: -100%;
@@ -204,78 +267,73 @@
             padding-bottom: 40px;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
-            transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 100;
             display: flex;
             flex-direction: column;
         }
 
-        .feedback-sheet.correct {
-            background-color: #d7ffb8;
-            color: var(--duo-green-dark);
-            bottom: 0;
-        }
-
-        .feedback-sheet.wrong {
-            background-color: #ffdfe0;
-            color: var(--duo-red-dark);
-            bottom: 0;
-        }
+        .feedback-sheet.show { bottom: 0; }
+        .feedback-sheet.correct { background-color: #d7ffb8; color: var(--duo-green-dark); }
+        .feedback-sheet.wrong { background-color: #ffdfe0; color: var(--duo-red-dark); }
 
         .feedback-header {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-weight: 800;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
         }
 
         .feedback-icon {
-            width: 30px;
-            height: 30px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 10px;
+            margin-right: 12px;
             background: white;
+            font-size: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .feedback-msg {
-            font-size: 1rem;
-            margin-bottom: 20px;
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+            font-weight: 600;
         }
 
         .continue-btn {
             width: 100%;
-            padding: 15px;
-            border-radius: 12px;
+            padding: 16px;
+            border-radius: 16px;
             font-size: 1.2rem;
             font-weight: 800;
             text-transform: uppercase;
             border: none;
             cursor: pointer;
             color: white;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+            box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+            transition: transform 0.1s;
         }
 
-        .correct .continue-btn {
-            background-color: var(--duo-green);
-            box-shadow: 0 4px 0 var(--duo-green-dark);
+        .continue-btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
         }
 
-        .wrong .continue-btn {
-            background-color: var(--duo-red);
-            box-shadow: 0 4px 0 var(--duo-red-dark);
-        }
+        .correct .continue-btn { background-color: var(--duo-green); box-shadow: 0 4px 0 var(--duo-green-dark); }
+        .correct .continue-btn:active { box-shadow: none; background-color: var(--duo-green-dark); }
+        
+        .wrong .continue-btn { background-color: var(--duo-red); box-shadow: 0 4px 0 var(--duo-red-dark); }
+        .wrong .continue-btn:active { box-shadow: none; background-color: var(--duo-red-dark); }
 
-        /* Start / End Screens */
+        /* --- Screens --- */
         .screen {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: white;
             z-index: 200;
             display: flex;
@@ -284,60 +342,63 @@
             justify-content: center;
             padding: 20px;
             text-align: center;
+            transition: opacity 0.3s;
         }
-        
-        .hidden {
-            display: none;
-        }
-
-        h1 {
-            color: var(--duo-green);
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        p {
-            color: #777;
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
+        .hidden { display: none; opacity: 0; }
 
         .btn-primary {
             background-color: var(--duo-green);
             color: white;
-            padding: 15px 40px;
+            padding: 16px 50px;
             border-radius: 16px;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 800;
             border: none;
             border-bottom: 5px solid var(--duo-green-dark);
             cursor: pointer;
             width: 100%;
-            max-width: 300px;
+            max-width: 320px;
+            transition: all 0.1s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-primary:active { transform: translateY(5px); border-bottom-width: 0px; }
+        .btn-primary:disabled { background-color: var(--duo-gray); border-bottom-color: #c0c0c0; cursor: not-allowed; }
+
+        /* --- Animations --- */
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            80% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); }
         }
 
-        .btn-primary:disabled {
-            background-color: var(--duo-gray);
-            border-bottom-color: #c7c7c7;
-            cursor: not-allowed;
-        }
-        
-        .btn-primary:active:not(:disabled) {
-            transform: translateY(3px);
-            border-bottom-width: 2px;
-        }
-
-        /* Shake Animation */
-        .shake {
-            animation: shake 0.5s;
-        }
-
-        @keyframes shake {
+        @keyframes wobble {
             0% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-5px); }
+            15% { transform: translateX(-6px) rotate(-5deg); }
+            30% { transform: translateX(5px) rotate(3deg); }
+            45% { transform: translateX(-4px) rotate(-3deg); }
+            60% { transform: translateX(3px) rotate(2deg); }
+            75% { transform: translateX(-2px) rotate(-1deg); }
             100% { transform: translateX(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* --- Particles --- */
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            font-size: 24px;
+            z-index: 150;
+            animation: particle-anim 1s forwards;
+        }
+
+        @keyframes particle-anim {
+            0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
         }
 
     </style>
@@ -345,19 +406,20 @@
 <body>
 
     <div id="start-screen" class="screen">
-        <h1 style="color: var(--duo-blue);">Quem Disse?</h1>
-        <p>A Elite Mexicana ou<br>A Realeza Saiyajin?</p>
-        <div style="font-size: 50px; margin-bottom: 30px;">😈 vs 👿</div>
-        <button id="start-btn" class="btn-primary" onclick="startGame()" disabled>CARREGANDO...</button>
-        <p id="error-msg" style="color: var(--duo-red); font-size: 0.9rem; display: none; margin-top: 10px;">
-            Erro ao carregar 'phrases.json'.<br>Use um servidor local (Live Server).
+        <h1 style="color: var(--duo-blue); font-size: 2.5rem; margin-bottom: 0;">Quem Disse?</h1>
+        <p style="margin-top: 10px; font-weight: 600;">Vilã de Novela ou Príncipe Alienígena?</p>
+        <div style="font-size: 80px; margin: 20px 0; animation: wobble 2s infinite;">😈 vs 👿</div>
+        <button id="start-btn" class="btn-primary" onclick="startGame()" disabled>Carregando...</button>
+        <p id="error-msg" style="color: var(--duo-red); font-size: 0.9rem; display: none; margin-top: 20px;">
+            ⚠️ Erro: Não foi possível carregar o arquivo phrases.json.
         </p>
     </div>
 
     <div id="end-screen" class="screen hidden">
-        <h1>Fim de Jogo!</h1>
-        <p id="final-score">Você acertou X de Y</p>
-        <button class="btn-primary" onclick="location.reload()">JOGAR DE NOVO</button>
+        <h1 style="font-size: 3rem;">Fim!</h1>
+        <p style="font-size: 1.5rem; color: var(--duo-text);">Seu placar final:</p>
+        <div id="final-score" style="font-size: 4rem; font-weight: 800; color: var(--duo-green); margin-bottom: 30px;">0/10</div>
+        <button class="btn-primary" onclick="location.reload()">Jogar Novamente</button>
     </div>
 
     <header>
@@ -377,13 +439,13 @@
             ...
         </div>
 
-        <div class="options-grid">
-            <div class="option-card" onclick="checkAnswer('Paola')">
+        <div class="options-grid" id="options-grid">
+            <div class="option-card" id="btn-Paola" onclick="checkAnswer('Paola', this)">
                 <img src="https://i.pinimg.com/originals/9f/21/3c/9f213c4114777265880f07425143a577.jpg" alt="Paola" class="option-img">
                 <div class="option-label">Paola</div>
             </div>
-            <div class="option-card" onclick="checkAnswer('Vegeta')">
-                <img src="https://i.pinimg.com/736x/88/2c/3f/882c3f81e649060b240167c1341c272e.jpg" alt="Vegeta" class="option-img">
+            <div class="option-card" id="btn-Vegeta" onclick="checkAnswer('Vegeta', this)">
+                 <img src="https://i.pinimg.com/736x/88/2c/3f/882c3f81e649060b240167c1341c272e.jpg" alt="Vegeta" class="option-img">
                 <div class="option-label">Vegeta</div>
             </div>
         </div>
@@ -394,43 +456,48 @@
             <div class="feedback-icon" id="feedback-icon">✓</div>
             <span id="feedback-title">Incrível!</span>
         </div>
-        <div class="feedback-msg" id="feedback-msg"></div>
-        <button class="continue-btn" onclick="nextQuestion()">CONTINUAR</button>
+        <div class="feedback-msg" id="feedback-msg">Mensagem de feedback</div>
+        <button class="continue-btn" id="continue-btn" onclick="nextQuestion()">CONTINUAR</button>
     </div>
 
     <script>
-        // CONFIG VARS
+        // --- CONFIGURAÇÕES ---
+        // GIFs de reação (Links externos do Tenor)
         const paolaGif = "https://media1.tenor.com/m/XjE9q_i2cHQAAAAd/paola-bracho-risada.gif";
         const vegetaGif = "https://media1.tenor.com/m/KeL93YkZ0mUAAAAC/vegeta-laughing.gif";
         
-        let database = []; // Will be loaded via fetch
+        // Emojis da explosão
+        const paolaParticles = ['💋', '🐍', '💰', '💸', '🍷'];
+        const vegetaParticles = ['🔥', '⚡', '💣', '🥊', '💢'];
+
+        let database = [];
         let questions = [];
         let currentIndex = 0;
         let score = 0;
         let isAnswered = false;
 
-        // Load Data on Init
+        // --- INICIALIZAÇÃO ---
         window.addEventListener('load', async () => {
             const startBtn = document.getElementById('start-btn');
             const errorMsg = document.getElementById('error-msg');
-
             try {
+                // Carrega o JSON
                 const response = await fetch('phrases.json');
-                if (!response.ok) throw new Error("Network response was not ok");
+                if (!response.ok) throw new Error("Falha na rede ao buscar frases.");
                 database = await response.json();
                 
-                // Enable Game
+                // Habilita o botão
                 startBtn.disabled = false;
                 startBtn.innerText = "COMEÇAR";
             } catch (error) {
-                console.error("Erro ao carregar JSON:", error);
-                startBtn.innerText = "ERRO";
+                console.error(error);
+                startBtn.innerText = "ERRO JSON";
                 startBtn.style.backgroundColor = "var(--duo-red)";
                 errorMsg.style.display = "block";
             }
         });
 
-        // Shuffle Utility
+        // Embaralhar Array
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -439,11 +506,40 @@
             return array;
         }
 
-        // Initialize Game
+        // Sistema de Partículas (Confete)
+        function spawnParticles(x, y, type) {
+            const particleCount = 15;
+            const emojis = type === 'Paola' ? paolaParticles : vegetaParticles;
+
+            for (let i = 0; i < particleCount; i++) {
+                const el = document.createElement('div');
+                el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                el.className = 'particle';
+                el.style.left = x + 'px';
+                el.style.top = y + 'px';
+                
+                // Física aleatória
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 50 + Math.random() * 100;
+                const tx = Math.cos(angle) * velocity;
+                const ty = Math.sin(angle) * velocity;
+                
+                el.style.setProperty('--tx', `${tx}px`);
+                el.style.setProperty('--ty', `${ty}px`);
+                
+                document.body.appendChild(el);
+                
+                // Remove após animação
+                setTimeout(() => el.remove(), 1000);
+            }
+        }
+
+        // --- LÓGICA DO JOGO ---
         function startGame() {
             if (database.length === 0) return;
             document.getElementById('start-screen').classList.add('hidden');
-            questions = shuffle([...database]).slice(0, 10); // Take 10 random questions
+            // Seleciona 10 perguntas aleatórias
+            questions = shuffle([...database]).slice(0, 10);
             currentIndex = 0;
             score = 0;
             renderQuestion();
@@ -452,59 +548,78 @@
         function renderQuestion() {
             isAnswered = false;
             
-            // Update Progress
+            // Atualiza Barra de Progresso
             const progressPct = (currentIndex / questions.length) * 100;
             document.getElementById('progress-bar').style.width = `${progressPct}%`;
             
-            // Reset UI
-            document.getElementById('feedback-sheet').classList.remove('correct', 'wrong');
-            document.getElementById('feedback-sheet').style.bottom = "-100%";
+            // Reseta UI
+            const sheet = document.getElementById('feedback-sheet');
+            sheet.classList.remove('show', 'correct', 'wrong');
+            
             document.getElementById('placeholder-icon').style.display = "block";
             document.getElementById('char-img').style.display = "none";
-            document.getElementById('char-img').src = "";
             
-            // Set Text
-            const currentQ = questions[currentIndex];
-            document.getElementById('question-text').innerText = `"${currentQ.text}"`;
+            // Reseta os cartões
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('correct-select', 'wrong-select', 'disabled');
+            });
+
+            // Insere Texto com Animação
+            const qBox = document.getElementById('question-text');
+            qBox.style.animation = 'none';
+            qBox.offsetHeight; /* força reflow */
+            qBox.style.animation = 'popIn 0.4s ease-out';
+            qBox.innerText = `"${questions[currentIndex].text}"`;
         }
 
-        function checkAnswer(selectedWho) {
+        function checkAnswer(selectedWho, cardElement) {
             if (isAnswered) return;
             isAnswered = true;
 
             const currentQ = questions[currentIndex];
             const isCorrect = selectedWho === currentQ.who;
+            
             const sheet = document.getElementById('feedback-sheet');
-            const feedbackTitle = document.getElementById('feedback-title');
-            const feedbackMsg = document.getElementById('feedback-msg');
-            const feedbackIcon = document.getElementById('feedback-icon');
+            const fbTitle = document.getElementById('feedback-title');
+            const fbMsg = document.getElementById('feedback-msg');
+            const fbIcon = document.getElementById('feedback-icon');
             
-            // Logic for Images: Always show the person who SAID it laughing
-            const gifToShow = currentQ.who === 'Paola' ? paolaGif : vegetaGif;
-            
-            // Update UI Image
+            // Desabilita o outro cartão
+            const otherCardId = selectedWho === 'Paola' ? 'btn-Vegeta' : 'btn-Paola';
+            document.getElementById(otherCardId).classList.add('disabled');
+
+            // Mostra o GIF de quem falou (rindo ou sério)
             document.getElementById('placeholder-icon').style.display = "none";
             const imgEl = document.getElementById('char-img');
-            imgEl.src = gifToShow;
+            imgEl.src = currentQ.who === 'Paola' ? paolaGif : vegetaGif;
             imgEl.style.display = "block";
 
             if (isCorrect) {
                 score++;
-                sheet.classList.add('correct');
-                feedbackTitle.innerText = "Correto!";
-                feedbackMsg.innerText = `Exatamente! Foi ${currentQ.who}.`;
-                feedbackIcon.innerHTML = "✓";
-                feedbackIcon.style.color = "var(--duo-green)";
-            } else {
-                sheet.classList.add('wrong');
-                feedbackTitle.innerText = "Errou...";
-                feedbackMsg.innerText = `Quem disse isso foi ${currentQ.who}!`;
-                feedbackIcon.innerHTML = "✕";
-                feedbackIcon.style.color = "var(--duo-red)";
+                cardElement.classList.add('correct-select');
                 
-                // Shake effect on text
-                document.getElementById('question-text').classList.add('shake');
-                setTimeout(() => document.getElementById('question-text').classList.remove('shake'), 500);
+                // Feedback Positivo
+                sheet.className = 'feedback-sheet correct show';
+                fbTitle.innerText = "Incrível!";
+                fbMsg.innerText = `Boa! Essa frase é da lenda ${currentQ.who}.`;
+                fbIcon.innerHTML = "✓";
+                fbIcon.style.color = "var(--duo-green)";
+                
+                // Explode Partículas no centro do cartão clicado
+                const rect = cardElement.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                spawnParticles(centerX, centerY, currentQ.who);
+
+            } else {
+                cardElement.classList.add('wrong-select');
+                
+                // Feedback Negativo
+                sheet.className = 'feedback-sheet wrong show';
+                fbTitle.innerText = "Ops...";
+                fbMsg.innerText = `Na verdade, foi ${currentQ.who} quem disse isso!`;
+                fbIcon.innerHTML = "✕";
+                fbIcon.style.color = "var(--duo-red)";
             }
         }
 
@@ -519,7 +634,7 @@
 
         function finishGame() {
             document.getElementById('end-screen').classList.remove('hidden');
-            document.getElementById('final-score').innerText = `Você acertou ${score} de ${questions.length}!`;
+            document.getElementById('final-score').innerText = `${score} / ${questions.length}`;
             document.getElementById('progress-bar').style.width = `100%`;
         }
     </script>
