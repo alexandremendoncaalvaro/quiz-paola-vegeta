@@ -1,310 +1,527 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Paola Bracho vs Vegeta — Quem disse?</title>
-  <style>
-    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
-    body { margin: 0; background:#0b0f17; color:#e8eefc; }
-    .wrap { max-width: 920px; margin: 0 auto; padding: 24px; }
-    .card { background: #111a2b; border: 1px solid #223154; border-radius: 14px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
-    h1 { margin: 0 0 10px; font-size: 20px; }
-    .muted { color: #aab6d6; }
-    .row { display:flex; gap: 10px; flex-wrap: wrap; align-items:center; }
-    button { cursor:pointer; border: 1px solid #2a3b66; background:#0f1730; color:#e8eefc; padding: 10px 12px; border-radius: 12px; font-weight: 650; }
-    button:hover { background:#142047; }
-    button.primary { background:#1b2b5b; border-color:#3757b3; }
-    button.danger { background:#3a1730; border-color:#9c3a77; }
-    button:disabled { opacity:.45; cursor:not-allowed; }
-    .quote { font-size: 20px; line-height: 1.35; margin: 14px 0 12px; }
-    .pill { display:inline-block; padding: 6px 10px; border-radius: 999px; border:1px solid #2a3b66; background:#0f1730; color:#cfe0ff; font-size: 12px; }
-    .status { margin-top: 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid #2a3b66; background:#0f1730; }
-    .ok { border-color:#2f8f5b; background:#0f1f19; }
-    .no { border-color:#b24a5a; background:#2a1216; }
-    .grid { display:grid; gap:10px; grid-template-columns: 1fr; }
-    @media (min-width: 760px) { .grid { grid-template-columns: 1.1fr .9fr; } }
-    .small { font-size: 12px; }
-    a { color:#9ec1ff; text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    input[type="checkbox"]{ transform: translateY(1px); }
-    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; padding: 2px 6px; border-radius: 8px; border:1px solid #2a3b66; background:#0f1730; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Quem disse: Paola ou Vegeta?</title>
+    <style>
+        :root {
+            --duo-green: #58cc02;
+            --duo-green-dark: #46a302;
+            --duo-red: #ff4b4b;
+            --duo-red-dark: #d42c2c;
+            --duo-blue: #1cb0f6;
+            --duo-blue-dark: #1899d6;
+            --duo-gray: #e5e5e5;
+            --duo-text: #4b4b4b;
+            --white: #ffffff;
+            --bg-color: #f7f7f7;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--white);
+            color: var(--duo-text);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Header & Progress */
+        header {
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .close-btn {
+            font-size: 24px;
+            color: #afafaf;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .progress-container {
+            flex-grow: 1;
+            height: 16px;
+            background-color: var(--duo-gray);
+            border-radius: 8px;
+            margin-left: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--duo-green);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 8px;
+        }
+
+        /* Main Game Area */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .character-display {
+            height: 180px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .character-img {
+            max-height: 100%;
+            max-width: 100%;
+            border-radius: 12px;
+            display: none; /* Hidden by default */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .placeholder-icon {
+            font-size: 80px;
+            color: var(--duo-gray);
+        }
+
+        .question-bubble {
+            border: 2px solid var(--duo-gray);
+            border-radius: 16px;
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--duo-text);
+            background: white;
+            position: relative;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .question-bubble::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 10px 10px;
+            border-style: solid;
+            border-color: var(--duo-gray) transparent;
+            display: block;
+            width: 0;
+        }
+
+        .question-bubble::before {
+            content: '';
+            position: absolute;
+            top: -7px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 10px 10px;
+            border-style: solid;
+            border-color: #fff transparent;
+            display: block;
+            width: 0;
+            z-index: 1;
+        }
+
+        /* Options Grid */
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .option-card {
+            background: white;
+            border: 2px solid var(--duo-gray);
+            border-bottom: 4px solid var(--duo-gray);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.1s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 150px;
+        }
+
+        .option-card:active {
+            transform: translateY(2px);
+            border-bottom-width: 2px;
+        }
+
+        .option-card.selected {
+            background-color: #ddf4ff;
+            border-color: var(--duo-blue);
+            border-bottom-color: var(--duo-blue-dark);
+        }
+
+        .option-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            object-fit: cover;
+            border: 2px solid var(--duo-gray);
+        }
+
+        .option-label {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--duo-text);
+        }
+
+        /* Feedback Sheet (Bottom) */
+        .feedback-sheet {
+            position: fixed;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            padding-bottom: 40px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feedback-sheet.correct {
+            background-color: #d7ffb8;
+            color: var(--duo-green-dark);
+            bottom: 0;
+        }
+
+        .feedback-sheet.wrong {
+            background-color: #ffdfe0;
+            color: var(--duo-red-dark);
+            bottom: 0;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+
+        .feedback-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            background: white;
+        }
+
+        .feedback-msg {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .continue-btn {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            color: white;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+        }
+
+        .correct .continue-btn {
+            background-color: var(--duo-green);
+            box-shadow: 0 4px 0 var(--duo-green-dark);
+        }
+
+        .wrong .continue-btn {
+            background-color: var(--duo-red);
+            box-shadow: 0 4px 0 var(--duo-red-dark);
+        }
+
+        /* Start / End Screens */
+        .screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .hidden {
+            display: none;
+        }
+
+        h1 {
+            color: var(--duo-green);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #777;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .btn-primary {
+            background-color: var(--duo-green);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 16px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            border: none;
+            border-bottom: 5px solid var(--duo-green-dark);
+            cursor: pointer;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .btn-primary:disabled {
+            background-color: var(--duo-gray);
+            border-bottom-color: #c7c7c7;
+            cursor: not-allowed;
+        }
+        
+        .btn-primary:active:not(:disabled) {
+            transform: translateY(3px);
+            border-bottom-width: 2px;
+        }
+
+        /* Shake Animation */
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="grid">
-      <div class="card">
-        <h1>Quem disse? <span class="muted">Paola Bracho</span> ou <span class="muted">Vegeta</span></h1>
 
-        <div class="row" style="justify-content:space-between; margin-bottom: 8px;">
-          <div class="row">
-            <span class="pill" id="modePill">Modo: Difícil</span>
-            <span class="pill">Placar: <b id="score">0</b>/<span id="count">0</span></span>
-            <span class="pill">Streak: <b id="streak">0</b></span>
-          </div>
-          <div class="row">
-            <button id="restartBtn" class="danger" title="Recomeçar (R)">Recomeçar</button>
-            <button id="nextBtn" class="primary" title="Próxima (N)">Próxima</button>
-          </div>
-        </div>
-
-        <div class="quote" id="quote">Clique em “Próxima” para começar.</div>
-
-        <div class="row" style="margin-top: 10px;">
-          <button id="paolaBtn" class="primary" style="flex:1;">Paola Bracho</button>
-          <button id="vegetaBtn" class="primary" style="flex:1;">Vegeta</button>
-        </div>
-
-        <div id="status" class="status muted">Dica: use <span class="kbd">N</span> (próxima) e <span class="kbd">R</span> (recomeçar).</div>
-
-        <div class="row small" style="margin-top: 10px; justify-content: space-between;">
-          <div class="muted">Fonte (aparece no modo estudo): <span id="src">—</span></div>
-          <div class="muted">ID: <span id="qid">—</span></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h1>Config</h1>
-
-        <div class="row" style="margin: 10px 0;">
-          <label class="row" style="gap:8px;">
-            <input id="hardMode" type="checkbox" checked />
-            <span><b>Modo difícil</b> (não revela a resposta automaticamente)</span>
-          </label>
-        </div>
-
-        <div class="row" style="margin: 10px 0;">
-          <label class="row" style="gap:8px;">
-            <input id="avoidObvious" type="checkbox" checked />
-            <span><b>Evitar frases muito óbvias</b></span>
-          </label>
-        </div>
-
-        <div class="row" style="margin: 10px 0;">
-          <label class="row" style="gap:8px;">
-            <input id="onlyCruel" type="checkbox" />
-            <span><b>Só “cruéis/sarcásticas”</b> (sem violência gráfica)</span>
-          </label>
-        </div>
-
-        <div class="row" style="margin: 10px 0;">
-          <label class="row" style="gap:8px;">
-            <input id="studyMode" type="checkbox" />
-            <span><b>Modo estudo</b> (mostra fonte e quem disse após responder)</span>
-          </label>
-        </div>
-
-        <div class="status muted small" style="margin-top: 12px;">
-          <div><b>Como jogar</b></div>
-          <div>1) Clique <b>Próxima</b></div>
-          <div>2) Escolha quem disse</div>
-          <div>3) No modo difícil, use <b>Próxima</b> para seguir (ou ative modo estudo).</div>
-        </div>
-
-        <div class="status muted small" style="margin-top: 12px;">
-          <div><b>Teclas</b></div>
-          <div><span class="kbd">1</span> Paola • <span class="kbd">2</span> Vegeta • <span class="kbd">N</span> Próxima • <span class="kbd">R</span> Recomeçar</div>
-        </div>
-      </div>
+    <div id="start-screen" class="screen">
+        <h1 style="color: var(--duo-blue);">Quem Disse?</h1>
+        <p>A Elite Mexicana ou<br>A Realeza Saiyajin?</p>
+        <div style="font-size: 50px; margin-bottom: 30px;">😈 vs 👿</div>
+        <button id="start-btn" class="btn-primary" onclick="startGame()" disabled>CARREGANDO...</button>
+        <p id="error-msg" style="color: var(--duo-red); font-size: 0.9rem; display: none; margin-top: 10px;">
+            Erro ao carregar 'phrases.json'.<br>Use um servidor local (Live Server).
+        </p>
     </div>
-  </div>
 
-  <script>
-    // Observação: As frases são carregadas do arquivo phrases.json para facilitar a expansão.
-    // Frases foram coletadas de listas/compilações públicas.
-    // Algumas fontes listam frases com variações de pontuação/ortografia.
+    <div id="end-screen" class="screen hidden">
+        <h1>Fim de Jogo!</h1>
+        <p id="final-score">Você acertou X de Y</p>
+        <button class="btn-primary" onclick="location.reload()">JOGAR DE NOVO</button>
+    </div>
 
-    let DB = [];
-    let phrasesLoaded = false;
+    <header>
+        <button class="close-btn" onclick="location.reload()">✕</button>
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+    </header>
 
-    // Função para carregar as frases do arquivo JSON
-    // Nota: Requer servidor web (não funciona com file://)
-    async function loadPhrases() {
-      try {
-        const response = await fetch('phrases.json');
-        if (!response.ok) {
-          throw new Error('Não foi possível carregar phrases.json');
+    <main>
+        <div class="character-display">
+            <div id="placeholder-icon" class="placeholder-icon">🤔</div>
+            <img id="char-img" class="character-img" src="" alt="Personagem">
+        </div>
+
+        <div class="question-bubble" id="question-text">
+            ...
+        </div>
+
+        <div class="options-grid">
+            <div class="option-card" onclick="checkAnswer('Paola')">
+                <img src="https://i.pinimg.com/originals/9f/21/3c/9f213c4114777265880f07425143a577.jpg" alt="Paola" class="option-img">
+                <div class="option-label">Paola</div>
+            </div>
+            <div class="option-card" onclick="checkAnswer('Vegeta')">
+                <img src="https://i.pinimg.com/736x/88/2c/3f/882c3f81e649060b240167c1341c272e.jpg" alt="Vegeta" class="option-img">
+                <div class="option-label">Vegeta</div>
+            </div>
+        </div>
+    </main>
+
+    <div id="feedback-sheet" class="feedback-sheet">
+        <div class="feedback-header">
+            <div class="feedback-icon" id="feedback-icon">✓</div>
+            <span id="feedback-title">Incrível!</span>
+        </div>
+        <div class="feedback-msg" id="feedback-msg"></div>
+        <button class="continue-btn" onclick="nextQuestion()">CONTINUAR</button>
+    </div>
+
+    <script>
+        // CONFIG VARS
+        const paolaGif = "https://media1.tenor.com/m/XjE9q_i2cHQAAAAd/paola-bracho-risada.gif";
+        const vegetaGif = "https://media1.tenor.com/m/KeL93YkZ0mUAAAAC/vegeta-laughing.gif";
+        
+        let database = []; // Will be loaded via fetch
+        let questions = [];
+        let currentIndex = 0;
+        let score = 0;
+        let isAnswered = false;
+
+        // Load Data on Init
+        window.addEventListener('load', async () => {
+            const startBtn = document.getElementById('start-btn');
+            const errorMsg = document.getElementById('error-msg');
+
+            try {
+                const response = await fetch('phrases.json');
+                if (!response.ok) throw new Error("Network response was not ok");
+                database = await response.json();
+                
+                // Enable Game
+                startBtn.disabled = false;
+                startBtn.innerText = "COMEÇAR";
+            } catch (error) {
+                console.error("Erro ao carregar JSON:", error);
+                startBtn.innerText = "ERRO";
+                startBtn.style.backgroundColor = "var(--duo-red)";
+                errorMsg.style.display = "block";
+            }
+        });
+
+        // Shuffle Utility
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
         }
-        DB = await response.json();
-        phrasesLoaded = true;
-        buildPool();
-      } catch (error) {
-        console.error('Erro ao carregar frases:', error);
-        setStatus('Erro ao carregar frases. Abra via servidor web (ex: python3 -m http.server).', 'no');
-        el.quote.textContent = 'Erro ao carregar frases. Veja o console.';
-      }
-    }
 
-    // ===== Estado =====
-    let pool = [];
-    let current = null;
-    let answered = false;
-    let score = 0;
-    let total = 0;
-    let streak = 0;
+        // Initialize Game
+        function startGame() {
+            if (database.length === 0) return;
+            document.getElementById('start-screen').classList.add('hidden');
+            questions = shuffle([...database]).slice(0, 10); // Take 10 random questions
+            currentIndex = 0;
+            score = 0;
+            renderQuestion();
+        }
 
-    const el = {
-      quote: document.getElementById("quote"),
-      status: document.getElementById("status"),
-      score: document.getElementById("score"),
-      count: document.getElementById("count"),
-      streak: document.getElementById("streak"),
-      src: document.getElementById("src"),
-      qid: document.getElementById("qid"),
-      nextBtn: document.getElementById("nextBtn"),
-      restartBtn: document.getElementById("restartBtn"),
-      paolaBtn: document.getElementById("paolaBtn"),
-      vegetaBtn: document.getElementById("vegetaBtn"),
-      hardMode: document.getElementById("hardMode"),
-      avoidObvious: document.getElementById("avoidObvious"),
-      onlyCruel: document.getElementById("onlyCruel"),
-      studyMode: document.getElementById("studyMode"),
-      modePill: document.getElementById("modePill"),
-    };
+        function renderQuestion() {
+            isAnswered = false;
+            
+            // Update Progress
+            const progressPct = (currentIndex / questions.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPct}%`;
+            
+            // Reset UI
+            document.getElementById('feedback-sheet').classList.remove('correct', 'wrong');
+            document.getElementById('feedback-sheet').style.bottom = "-100%";
+            document.getElementById('placeholder-icon').style.display = "block";
+            document.getElementById('char-img').style.display = "none";
+            document.getElementById('char-img').src = "";
+            
+            // Set Text
+            const currentQ = questions[currentIndex];
+            document.getElementById('question-text').innerText = `"${currentQ.text}"`;
+        }
 
-    function shuffle(arr) {
-      for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-      return arr;
-    }
+        function checkAnswer(selectedWho) {
+            if (isAnswered) return;
+            isAnswered = true;
 
-    function buildPool() {
-      if (!phrasesLoaded) {
-        setStatus("Aguardando carregamento das frases...", "neutral");
-        return;
-      }
+            const currentQ = questions[currentIndex];
+            const isCorrect = selectedWho === currentQ.who;
+            const sheet = document.getElementById('feedback-sheet');
+            const feedbackTitle = document.getElementById('feedback-title');
+            const feedbackMsg = document.getElementById('feedback-msg');
+            const feedbackIcon = document.getElementById('feedback-icon');
+            
+            // Logic for Images: Always show the person who SAID it laughing
+            const gifToShow = currentQ.who === 'Paola' ? paolaGif : vegetaGif;
+            
+            // Update UI Image
+            document.getElementById('placeholder-icon').style.display = "none";
+            const imgEl = document.getElementById('char-img');
+            imgEl.src = gifToShow;
+            imgEl.style.display = "block";
 
-      const avoid = el.avoidObvious.checked;
-      const cruelOnly = el.onlyCruel.checked;
+            if (isCorrect) {
+                score++;
+                sheet.classList.add('correct');
+                feedbackTitle.innerText = "Correto!";
+                feedbackMsg.innerText = `Exatamente! Foi ${currentQ.who}.`;
+                feedbackIcon.innerHTML = "✓";
+                feedbackIcon.style.color = "var(--duo-green)";
+            } else {
+                sheet.classList.add('wrong');
+                feedbackTitle.innerText = "Errou...";
+                feedbackMsg.innerText = `Quem disse isso foi ${currentQ.who}!`;
+                feedbackIcon.innerHTML = "✕";
+                feedbackIcon.style.color = "var(--duo-red)";
+                
+                // Shake effect on text
+                document.getElementById('question-text').classList.add('shake');
+                setTimeout(() => document.getElementById('question-text').classList.remove('shake'), 500);
+            }
+        }
 
-      pool = DB.filter(q => {
-        if (avoid && q.obvious) return false;
-        if (cruelOnly && !q.cruel) return false;
-        return true;
-      });
+        function nextQuestion() {
+            currentIndex++;
+            if (currentIndex < questions.length) {
+                renderQuestion();
+            } else {
+                finishGame();
+            }
+        }
 
-      // balancear para não sair só um lado
-      const pa = pool.filter(x => x.who === "Paola");
-      const ve = pool.filter(x => x.who === "Vegeta");
-      const n = Math.min(pa.length, ve.length);
-
-      pool = shuffle(pa).slice(0, n).concat(shuffle(ve).slice(0, n));
-      pool = shuffle(pool);
-
-      current = null;
-      answered = false;
-      score = 0;
-      total = 0;
-      streak = 0;
-      renderScore();
-      setModePill();
-      setStatus("Clique em “Próxima” para começar.", "neutral");
-      el.quote.textContent = "Clique em “Próxima” para começar.";
-      el.src.textContent = "—";
-      el.qid.textContent = "—";
-    }
-
-    function setModePill() {
-      const hard = el.hardMode.checked;
-      const study = el.studyMode.checked;
-      el.modePill.textContent = study ? "Modo: Estudo" : (hard ? "Modo: Difícil" : "Modo: Casual");
-    }
-
-    function renderScore() {
-      el.score.textContent = String(score);
-      el.count.textContent = String(total);
-      el.streak.textContent = String(streak);
-    }
-
-    function setStatus(msg, kind) {
-      el.status.textContent = msg;
-      el.status.className = "status";
-      if (kind === "ok") el.status.classList.add("ok");
-      else if (kind === "no") el.status.classList.add("no");
-      else el.status.classList.add("muted");
-    }
-
-    function nextQuestion() {
-      if (!phrasesLoaded) {
-        setStatus("Aguardando carregamento das frases...", "neutral");
-        return;
-      }
-      if (pool.length === 0) buildPool();
-      current = pool.shift();
-      answered = false;
-
-      el.quote.textContent = "“" + current.text + "”";
-      el.qid.textContent = current.id;
-
-      if (el.studyMode.checked) {
-        el.src.textContent = current.src;
-      } else {
-        el.src.textContent = "—";
-      }
-
-      setStatus("Quem disse?", "neutral");
-      enableChoices(true);
-    }
-
-    function enableChoices(on) {
-      el.paolaBtn.disabled = !on;
-      el.vegetaBtn.disabled = !on;
-    }
-
-    function answer(who) {
-      if (!current || answered) return;
-      answered = true;
-      total += 1;
-
-      const correct = (who === current.who);
-      if (correct) {
-        score += 1;
-        streak += 1;
-        setStatus("✅ Acertou!", "ok");
-      } else {
-        streak = 0;
-        setStatus("❌ Errou.", "no");
-      }
-      renderScore();
-
-      const reveal = el.studyMode.checked || !el.hardMode.checked;
-      if (reveal) {
-        const said = current.who === "Paola" ? "Paola Bracho" : "Vegeta";
-        const extra = "Resposta: " + said + " • Fonte: " + current.src;
-        setStatus((correct ? "✅ Acertou! " : "❌ Errou. ") + extra, correct ? "ok" : "no");
-        el.src.textContent = current.src;
-      }
-
-      enableChoices(false);
-    }
-
-    // ===== Eventos =====
-    el.nextBtn.addEventListener("click", nextQuestion);
-    el.restartBtn.addEventListener("click", buildPool);
-
-    el.paolaBtn.addEventListener("click", () => answer("Paola"));
-    el.vegetaBtn.addEventListener("click", () => answer("Vegeta"));
-
-    [el.hardMode, el.avoidObvious, el.onlyCruel, el.studyMode].forEach(cb => {
-      cb.addEventListener("change", () => {
-        setModePill();
-        buildPool();
-      });
-    });
-
-    document.addEventListener("keydown", (e) => {
-      const k = e.key.toLowerCase();
-      if (k === "n") nextQuestion();
-      if (k === "r") buildPool();
-      if (k === "1") answer("Paola");
-      if (k === "2") answer("Vegeta");
-    });
-
-    // init
-    loadPhrases();
-  </script>
+        function finishGame() {
+            document.getElementById('end-screen').classList.remove('hidden');
+            document.getElementById('final-score').innerText = `Você acertou ${score} de ${questions.length}!`;
+            document.getElementById('progress-bar').style.width = `100%`;
+        }
+    </script>
 </body>
 </html>
